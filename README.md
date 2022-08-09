@@ -4,3 +4,4 @@
 4. Understand the pipeline
 5. Install Nodemon
 6. Handle Multiple Routes
+7. Send HTML File
