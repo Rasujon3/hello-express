@@ -29,3 +29,4 @@
 18. Seperate Router File
 19. Seperate Controller
 20. Understand Errors
+21. Global Error Handling

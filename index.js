@@ -18,6 +18,14 @@ app.use((req, res, next) => {
   next(error);
 });
 
+app.use((err, req, res, next) => {
+  console.log("Error", err);
+  if (err.status) {
+    return res.status(err.status).send(`<h1>${err.message}</h1>`);
+  }
+  res.status(500).send(`<h1>Something went wrong</h1>`);
+});
+
 app.listen(4000, () => {
   console.log(`Server is listening on http://localhost:4000`);
 });

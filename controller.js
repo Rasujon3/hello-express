@@ -1,7 +1,9 @@
 const fs = require("fs");
 
 exports.homeController = (req, res) => {
-  //   throw new Error("Wrong");
+  const error = new Error("Bad Request");
+  error.status = 400;
+  throw error;
   fs.readFile("./Pages/index.html", (err, data) => {
     if (err) {
       console.log("Error", err);
