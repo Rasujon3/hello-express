@@ -1,10 +1,8 @@
 const express = require("express");
-const fs = require("fs");
 const cors = require("cors");
 const morgan = require("morgan");
 
 const app = express();
-const router = express.Router();
 
 // Global Middleware
 app.use(express.json());
@@ -12,44 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
 app.use(globalMiddleware);
-app.use(router);
-
-router.get("/", (req, res) => {
-  // console.log(req.url);
-  fs.readFile("./Pages/index.html", (err, data) => {
-    if (err) {
-      console.log("Error", err);
-      res.send(`<h1>Something went wrong</h1>`);
-    } else {
-      res.write(data);
-      res.end();
-    }
-  });
-});
-
-router.get("/about", localMiddleware, (req, res) => {
-  fs.readFile("./Pages/about.html", (err, data) => {
-    if (err) {
-      console.log("Error", err);
-      res.send(`<h1>Something went wrong</h1>`);
-    } else {
-      res.write(data);
-      res.end();
-    }
-  });
-});
-
-router.get("/help", (req, res) => {
-  fs.readFile("./Pages/help.html", (err, data) => {
-    if (err) {
-      console.log("Error", err);
-      res.send(`<h1>Something went wrong</h1>`);
-    } else {
-      res.write(data);
-      res.end();
-    }
-  });
-});
+app.use(require("./routes"));
 
 app.listen(4000, () => {
   console.log(`Server is listening on http://localhost:4000`);
