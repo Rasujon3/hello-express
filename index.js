@@ -12,6 +12,12 @@ app.use(cors());
 app.use(globalMiddleware);
 app.use(require("./routes"));
 
+app.use((req, res, next) => {
+  const error = new Error("404 Not Found");
+  error.status = 404;
+  next(error);
+});
+
 app.listen(4000, () => {
   console.log(`Server is listening on http://localhost:4000`);
 });

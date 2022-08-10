@@ -28,3 +28,4 @@
 17. Understand Router
 18. Seperate Router File
 19. Seperate Controller
+20. Understand Errors
