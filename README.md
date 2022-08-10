@@ -30,3 +30,4 @@
 19. Seperate Controller
 20. Understand Errors
 21. Global Error Handling
+22. What is Static File
