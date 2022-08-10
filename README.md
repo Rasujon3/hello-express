@@ -27,3 +27,4 @@
 16. Create Custom Middleware
 17. Understand Router
 18. Seperate Router File
+19. Seperate Controller
