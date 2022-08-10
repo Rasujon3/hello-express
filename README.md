@@ -31,3 +31,4 @@
 20. Understand Errors
 21. Global Error Handling
 22. What is Static File
+23. Serve Static Files
