@@ -1,9 +1,18 @@
 const express = require("express");
 const fs = require("fs");
+const cors = require("cors");
+const morgan = require("morgan");
 
 const app = express();
 
+// Global Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+app.use(cors());
+
 app.get("/", (req, res) => {
+  console.log(req.url);
   fs.readFile("./Pages/index.html", (err, data) => {
     if (err) {
       console.log("Error", err);
