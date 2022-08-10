@@ -10,9 +10,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
+app.use(globalMiddleware);
 
 app.get("/", (req, res) => {
-  console.log(req.url);
+  // console.log(req.url);
   fs.readFile("./Pages/index.html", (err, data) => {
     if (err) {
       console.log("Error", err);
@@ -24,7 +25,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/about", (req, res) => {
+app.get("/about", localMiddleware, (req, res) => {
   fs.readFile("./Pages/about.html", (err, data) => {
     if (err) {
       console.log("Error", err);
@@ -59,4 +60,22 @@ function handler(req, res, next) {
   // 1. read request object
   // 2. process request
   // 3. response back the result
+}
+
+function middlewareSignature(req, res, next) {
+  next();
+}
+
+function globalMiddleware(req, res, next) {
+  console.log(`${req.method} - ${req.url}`);
+  console.log("I am a global middleware");
+  if (req.query.bad) {
+    return res.status(400).send("Bad Request");
+  }
+  next();
+}
+
+function localMiddleware(req, res, next) {
+  console.log("I am a local middleware");
+  next();
 }
