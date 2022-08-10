@@ -4,6 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const app = express();
+const router = express.Router();
 
 // Global Middleware
 app.use(express.json());
@@ -11,8 +12,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors());
 app.use(globalMiddleware);
+app.use(router);
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
   // console.log(req.url);
   fs.readFile("./Pages/index.html", (err, data) => {
     if (err) {
@@ -25,7 +27,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/about", localMiddleware, (req, res) => {
+router.get("/about", localMiddleware, (req, res) => {
   fs.readFile("./Pages/about.html", (err, data) => {
     if (err) {
       console.log("Error", err);
@@ -37,7 +39,7 @@ app.get("/about", localMiddleware, (req, res) => {
   });
 });
 
-app.get("/help", (req, res) => {
+router.get("/help", (req, res) => {
   fs.readFile("./Pages/help.html", (err, data) => {
     if (err) {
       console.log("Error", err);
