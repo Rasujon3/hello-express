@@ -52,6 +52,9 @@ app.listen(4000, () => {
   console.log(`Server is listening on http://localhost:4000`);
 });
 
+// This is a middleware Signature
+// If everything seems ok, Controller will call response methods
+// If everything seems ok, Middleware will call next
 function handler(req, res, next) {
   // 1. read request object
   // 2. process request
